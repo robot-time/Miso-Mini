@@ -89,7 +89,21 @@ def build_base_and_tokenizer(cfg: dict):
     return model, tokenizer, device
 
 
+def require_peft_adapter_dir(adapter_dir: Path, role: str) -> None:
+    if not adapter_dir.is_dir():
+        raise FileNotFoundError(f"Missing adapter dir ({role}): {adapter_dir}")
+    if not (adapter_dir / "adapter_config.json").is_file():
+        raise FileNotFoundError(
+            f"Can't find 'adapter_config.json' at {adapter_dir!s}. "
+            f"The triad LoRA weights are not in this image path. "
+            f"Mount your trained adapters (folder with reasoning/, response/, critic/) "
+            f"and set env TRIAD_ADAPTERS_DIR to that mount, or uncomment the COPY lines "
+            f"in the repo Dockerfile and rebuild with outputs/triad_adapters present."
+        )
+
+
 def load_model_tokenizer(cfg: dict, adapter_dir: Path):
+    require_peft_adapter_dir(adapter_dir, "adapter")
     model, tokenizer, device = build_base_and_tokenizer(cfg)
     model = PeftModel.from_pretrained(model, str(adapter_dir), is_trainable=False)
     model.eval()
@@ -181,8 +195,7 @@ class TriadHotSwapRuntime:
         c_dir: Path,
     ):
         for d, name in ((r_dir, "reasoning"), (s_dir, "response"), (c_dir, "critic")):
-            if not d.is_dir():
-                raise FileNotFoundError(f"Missing adapter dir ({name}): {d}")
+            require_peft_adapter_dir(d, name)
 
         base, self.tokenizer, self.device = build_base_and_tokenizer(cfg)
         self.model = PeftModel.from_pretrained(
