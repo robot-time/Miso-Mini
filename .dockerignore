@@ -1,0 +1,12 @@
+.git
+.github
+.venv
+__pycache__
+*.pyc
+.DS_Store
+outputs
+eval
+local
+*.tar.gz
+openai_key.txt
+.cursor

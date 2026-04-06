@@ -192,7 +192,7 @@ Smoke-test inference:
 python scripts/infer_triad.py --adapters-dir outputs/triad_adapters --question "Hello" --json --quiet
 ```
 
-**RunPod Serverless (HTTP triad endpoint):** see [RUNPOD_SERVERLESS.md](RUNPOD_SERVERLESS.md) — `serverless/Dockerfile`, hot-swap single base + 3 LoRAs.
+**RunPod Serverless (HTTP triad endpoint):** see [RUNPOD_SERVERLESS.md](RUNPOD_SERVERLESS.md) — root `Dockerfile`, `serverless/handler.py`, hot-swap single base + 3 LoRAs.
 
 ### Unsloth slow at startup or you hit Ctrl+C by mistake
 
