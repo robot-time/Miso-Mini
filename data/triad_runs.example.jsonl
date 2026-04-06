@@ -1,0 +1,2 @@
+{"id": "1", "question": "test", "reasoning": "r", "draft": "short", "final": "a bit longer answer", "draft_ne_final": true, "gold_in_final": false}
+{"id": "2", "question": "test2", "reasoning": "r2", "draft": "same", "final": "same", "draft_ne_final": false, "gold_in_final": false}

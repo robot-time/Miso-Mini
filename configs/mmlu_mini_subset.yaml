@@ -1,0 +1,22 @@
+# Small MMLU subset (8 subjects) for faster eval + capability breakdown.
+# Keep task list in sync with MMLU_MINI_SUBJECTS in scripts/benchmark_suite.py
+#
+# Manual run:
+#   lm_eval run --include_path configs --tasks mmlu_mini_subset \
+#     --model hf --model_args pretrained=MODEL --num_fewshot 5 --device cuda
+#
+group: mmlu_mini_subset
+task:
+  - mmlu_high_school_mathematics
+  - mmlu_elementary_mathematics
+  - mmlu_conceptual_physics
+  - mmlu_college_computer_science
+  - mmlu_high_school_computer_science
+  - mmlu_miscellaneous
+  - mmlu_global_facts
+  - mmlu_high_school_world_history
+aggregate_metric_list:
+  - metric: acc
+    weight_by_size: true
+metadata:
+  version: 1

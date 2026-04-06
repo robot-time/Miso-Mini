@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Miso Sample Schema v1",
+  "type": "object",
+  "required": ["id", "task_type", "input", "targets", "metadata"],
+  "properties": {
+    "id": { "type": "string" },
+    "task_type": {
+      "type": "string",
+      "enum": ["qa_refine", "debate", "compression", "direct"]
+    },
+    "input": {
+      "type": "object",
+      "required": ["question"],
+      "properties": {
+        "question": { "type": "string" },
+        "context": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "targets": {
+      "type": "object",
+      "properties": {
+        "draft": { "type": "string" },
+        "critique": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["type", "text"],
+            "properties": {
+              "type": { "type": "string" },
+              "text": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "improved": { "type": "string" },
+        "perspectives": {
+          "type": "object",
+          "properties": {
+            "A": { "type": "string" },
+            "B": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "adjudication": { "type": "string" },
+        "compressed_memory": { "type": "string" },
+        "answer": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["domain", "difficulty", "source_model", "quality_score"],
+      "properties": {
+        "domain": { "type": "string" },
+        "difficulty": { "type": "string", "enum": ["easy", "med", "hard"] },
+        "source_model": { "type": "string" },
+        "quality_score": { "type": "number" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

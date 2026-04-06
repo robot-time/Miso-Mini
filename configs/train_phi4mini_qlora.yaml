@@ -1,0 +1,34 @@
+model_name: microsoft/Phi-4-mini-instruct
+max_seq_length: 2048
+load_in_4bit: true
+dtype: null
+
+lora:
+  r: 32
+  alpha: 32
+  dropout: 0.05
+  bias: none
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
+training:
+  per_device_train_batch_size: 2
+  gradient_accumulation_steps: 8
+  warmup_steps: 100
+  max_steps: 1000
+  learning_rate: 0.0002
+  logging_steps: 10
+  save_steps: 200
+  optim: adamw_8bit
+  weight_decay: 0.01
+  lr_scheduler_type: cosine
+  seed: 3407
+  fp16: false
+  bf16: true
+  report_to: none

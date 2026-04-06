@@ -1,0 +1,14 @@
+openai_key.txt
+.venv/
+__pycache__/
+*.pyc
+outputs/
+miso-mini-runpod-*.tar.gz
+miso-mini-gpu-eval-*.tar.gz
+# Local-only notes (SSH, etc.) — never commit
+local/
+# Large local eval artifacts / adapters pulled from RunPod (keep repo clone small)
+eval/
+# WildChat-derived SFT can trip GitHub secret scanning (URLs/tokens in user text); regenerate locally
+data/response_sft.jsonl
+.DS_Store

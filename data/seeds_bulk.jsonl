@@ -1,0 +1,83 @@
+{"question": "What is the bias\u2013variance tradeoff?", "context": ""}
+{"question": "When would you use cross-validation?", "context": ""}
+{"question": "What is regularization and why use it?", "context": ""}
+{"question": "Explain gradient descent in one tight paragraph.", "context": ""}
+{"question": "What is a confusion matrix?", "context": ""}
+{"question": "What does it mean for a model to be calibrated?", "context": ""}
+{"question": "What is transfer learning?", "context": ""}
+{"question": "What is an embedding in ML?", "context": ""}
+{"question": "What is Big-O notation and why does it matter?", "context": ""}
+{"question": "Explain TCP vs UDP in practical terms.", "context": ""}
+{"question": "What is a race condition?", "context": ""}
+{"question": "What is idempotency in APIs?", "context": ""}
+{"question": "What is eventual consistency?", "context": ""}
+{"question": "What is a deadlock?", "context": ""}
+{"question": "What is the difference between process and thread?", "context": ""}
+{"question": "What is virtual memory?", "context": ""}
+{"question": "What is a REST API?", "context": ""}
+{"question": "What is OAuth for, at a high level?", "context": ""}
+{"question": "What is a CDN?", "context": ""}
+{"question": "What is garbage collection?", "context": ""}
+{"question": "What is dependency injection?", "context": ""}
+{"question": "What is a pure function?", "context": ""}
+{"question": "What is immutability and a benefit?", "context": ""}
+{"question": "What is a unit test vs integration test?", "context": ""}
+{"question": "What is technical debt?", "context": ""}
+{"question": "What is semantic versioning?", "context": ""}
+{"question": "What is CI/CD?", "context": ""}
+{"question": "What is a monorepo?", "context": ""}
+{"question": "What is an ORM?", "context": ""}
+{"question": "What is middleware in web apps?", "context": ""}
+{"question": "What is rate limiting?", "context": ""}
+{"question": "What is a prime number?", "context": ""}
+{"question": "What is modular arithmetic?", "context": ""}
+{"question": "What is Bayes' theorem in plain language?", "context": ""}
+{"question": "What is a derivative (intuitive)?", "context": ""}
+{"question": "What is a vector vs scalar?", "context": ""}
+{"question": "What is a matrix multiply used for in ML?", "context": ""}
+{"question": "How do you write a clear bug report?", "context": ""}
+{"question": "What is a user story?", "context": ""}
+{"question": "What is scope creep?", "context": ""}
+{"question": "How do you prioritize a backlog?", "context": ""}
+{"question": "What is an MVP?", "context": ""}
+{"question": "What is SQL injection?", "context": ""}
+{"question": "What is XSS?", "context": ""}
+{"question": "What is MFA?", "context": ""}
+{"question": "What is the principle of least privilege?", "context": ""}
+{"question": "Why is the sky blue (short)?", "context": ""}
+{"question": "What is photosynthesis in one sentence?", "context": ""}
+{"question": "What is evolution by natural selection?", "context": ""}
+{"question": "What is confirmation bias?", "context": ""}
+{"question": "What is Occam's razor?", "context": ""}
+{"question": "How do you summarize a long article?", "context": ""}
+{"question": "What makes an argument strong vs weak?", "context": ""}
+{"question": "What is a straw man fallacy?", "context": ""}
+{"question": "What is a primary key?", "context": ""}
+{"question": "What is a JOIN in SQL?", "context": ""}
+{"question": "What is normalization in databases?", "context": ""}
+{"question": "What is an index in a database?", "context": ""}
+{"question": "How do you debug a failing script?", "context": ""}
+{"question": "What is latency vs throughput?", "context": ""}
+{"question": "What is caching?", "context": ""}
+{"question": "What is compression?", "context": ""}
+{"question": "What is lossy vs lossless?", "context": ""}
+{"question": "What is Unicode?", "context": ""}
+{"question": "What is UTF-8?", "context": ""}
+{"question": "What is JSON?", "context": ""}
+{"question": "What is YAML used for?", "context": ""}
+{"question": "What is Docker?", "context": ""}
+{"question": "What is Kubernetes at a high level?", "context": ""}
+{"question": "What is a load balancer?", "context": ""}
+{"question": "What is horizontal scaling?", "context": ""}
+{"question": "What is a message queue?", "context": ""}
+{"question": "What is idempotency in payments?", "context": ""}
+{"question": "What is double-entry bookkeeping?", "context": ""}
+{"question": "What is inflation?", "context": ""}
+{"question": "What is compound interest?", "context": ""}
+{"question": "What is opportunity cost?", "context": ""}
+{"question": "What is a Pareto principle use case?", "context": ""}
+{"question": "What are the main risks and constraints we should track?", "context": "Project Orion is an internal initiative to consolidate three legacy billing systems into one API.\nStakeholders: Finance (accuracy), Support (refunds within 48h), and Compliance (audit logs 7 years).\nConstraints: no downtime during US business hours; migration must be reversible for 30 days.\nRisks: duplicate charges if webhooks retry; partial outages in region eu-west-1 last quarter.\nSuccess metrics: p95 checkout latency under 400ms; dispute rate below 0.3%; zero P1 incidents in rollout.\nTimeline: design freeze March 15; pilot 10% traffic April 1; full cutover May 1.\nOpen decisions: whether to store card tokens in-house or use vault provider; SLA for webhook delivery."}
+{"question": "What decisions are still open?", "context": "Meeting notes \u2014 Q2 planning. Alice proposed hiring two SREs; Bob worried about budget.\nWe agreed to pilot on-call rotation with existing team first. Action: Carol drafts runbook by Friday.\nCustomer churn spiked in segment SMB after price change; marketing to run retention experiment.\nEngineering velocity down 15% due to incident load; propose no new features for two sprints.\nSecurity review flagged weak MFA adoption; require MFA for admin roles next month."}
+{"question": "Summarize success metrics and timeline.", "context": "Study summary (fictional): n=240 adults, 12-week intervention combining sleep hygiene coaching\nand light exercise. Primary outcome: self-reported sleep quality (Likert). Secondary: HRV wearable data.\nResults: intervention arm +0.8 SD vs control on sleep quality; adherence 68%; dropout 12%.\nLimitations: self-report bias; no polysomnography; population mostly urban, ages 25\u201345.\nConclusion: promising but needs objective sleep measures and broader demographics."}
+{"question": "What should engineering prioritize based on these notes?", "context": "Project Orion is an internal initiative to consolidate three legacy billing systems into one API.\nStakeholders: Finance (accuracy), Support (refunds within 48h), and Compliance (audit logs 7 years).\nConstraints: no downtime during US business hours; migration must be reversible for 30 days.\nRisks: duplicate charges if webhooks retry; partial outages in region eu-west-1 last quarter.\nSuccess metrics: p95 checkout latency under 400ms; dispute rate below 0.3%; zero P1 incidents in rollout.\nTimeline: design freeze March 15; pilot 10% traffic April 1; full cutover May 1.\nOpen decisions: whether to store card tokens in-house or use vault provider; SLA for webhook delivery."}
+{"question": "What are the study limitations and what would you do next?", "context": "Meeting notes \u2014 Q2 planning. Alice proposed hiring two SREs; Bob worried about budget.\nWe agreed to pilot on-call rotation with existing team first. Action: Carol drafts runbook by Friday.\nCustomer churn spiked in segment SMB after price change; marketing to run retention experiment.\nEngineering velocity down 15% due to incident load; propose no new features for two sprints.\nSecurity review flagged weak MFA adoption; require MFA for admin roles next month."}

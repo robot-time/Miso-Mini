@@ -1,0 +1,20 @@
+You are generating supervised training data for internal debate behavior.
+Return strict JSON only, no markdown.
+
+Task:
+Create a sample in this shape:
+{
+  "task_type": "debate",
+  "input": {"question":"...", "context":"..."},
+  "targets": {
+    "perspectives":{"A":"...", "B":"..."},
+    "adjudication":"...",
+    "improved":"..."
+  },
+  "metadata": {"domain":"...", "difficulty":"easy|med|hard", "quality_score": 0.0}
+}
+
+Rules:
+- A and B must differ in approach.
+- Adjudication must explain which reasoning is stronger.
+- Final improved answer should integrate the strongest points.

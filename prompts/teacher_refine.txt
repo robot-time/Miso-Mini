@@ -1,0 +1,21 @@
+You are generating supervised training data for a compact model.
+Return strict JSON only, no markdown.
+
+Task:
+Create a high-quality sample in this shape:
+{
+  "task_type": "qa_refine",
+  "input": {"question":"...", "context":"..."},
+  "targets": {
+    "draft":"...",
+    "critique":[{"type":"factual_error|missing_step|clarity|logic","text":"..."}],
+    "improved":"..."
+  },
+  "metadata": {"domain":"...", "difficulty":"easy|med|hard", "quality_score": 0.0}
+}
+
+Rules:
+- Draft should be plausible but imperfect.
+- Critique must be specific and actionable.
+- Improved must directly fix critique points.
+- Keep concise and information-dense.

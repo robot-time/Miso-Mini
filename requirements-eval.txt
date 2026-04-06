@@ -1,0 +1,4 @@
+# Optional: standardized benchmarks + plots (CUDA box or local for plotting only)
+#   pip install -r requirements-eval.txt
+lm-eval>=0.4.0
+matplotlib>=3.8.0

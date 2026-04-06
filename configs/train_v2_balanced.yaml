@@ -1,0 +1,38 @@
+# V2 balanced LoRA — fresh adapter from base only (do not pass --adapter-dir).
+# Base: microsoft/Phi-4-mini-instruct. Data: data/v2_mix_sft.jsonl from scripts/build_v2_mix.py
+#
+# Tuning vs triad_reasoning.yaml: lower rank, lower LR, more steps, for a wider data mix.
+model_name: microsoft/Phi-4-mini-instruct
+max_seq_length: 2048
+load_in_4bit: true
+dtype: null
+
+lora:
+  r: 16
+  alpha: 16
+  dropout: 0.05
+  bias: none
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
+training:
+  per_device_train_batch_size: 2
+  gradient_accumulation_steps: 8
+  warmup_steps: 100
+  max_steps: 800
+  learning_rate: 0.0001
+  logging_steps: 20
+  save_steps: 200
+  optim: adamw_8bit
+  weight_decay: 0.01
+  lr_scheduler_type: cosine
+  seed: 4242
+  fp16: false
+  bf16: true
+  report_to: none

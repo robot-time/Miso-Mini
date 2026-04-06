@@ -1,0 +1,19 @@
+You are generating supervised training data for memory compression.
+Return strict JSON only, no markdown.
+
+Task:
+Create a sample in this shape:
+{
+  "task_type": "compression",
+  "input": {"question":"...", "context":"... long context ..."},
+  "targets": {
+    "compressed_memory":"...",
+    "answer":"..."
+  },
+  "metadata": {"domain":"...", "difficulty":"easy|med|hard", "quality_score": 0.0}
+}
+
+Rules:
+- Context should be meaningfully longer than compressed_memory.
+- compressed_memory must preserve key facts and constraints.
+- answer must rely on compressed_memory, not irrelevant details.
