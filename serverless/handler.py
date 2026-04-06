@@ -23,6 +23,17 @@ import sys
 import threading
 from pathlib import Path
 
+
+def _bootstrap_hf_env() -> None:
+    """Use baked-in Hub cache if present (see Dockerfile EMBED_PHI4_BASE); else rely on HF_HOME from RunPod env."""
+    baked = Path("/app/hf_cache")
+    if baked.is_dir() and any(baked.iterdir()):
+        os.environ.setdefault("HF_HOME", str(baked.resolve()))
+    os.environ.setdefault("HF_HUB_DISABLE_XET", "1")
+
+
+_bootstrap_hf_env()
+
 # /app/infer_triad.py (see Dockerfile)
 sys.path.insert(0, "/app")
 

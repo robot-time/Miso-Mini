@@ -20,6 +20,8 @@ docker build -t YOUR_REGISTRY/miso-triad-serverless:latest .
 
 RunPod **GitHub** integration: set the Dockerfile path to **`Dockerfile`** (repository root) and build context to the **repo root** (`.`). Do **not** use `serverless/` as the context directory, or `COPY serverless/...` will fail.
 
+**Build argument `EMBED_PHI4_BASE` (important):** the default is **`1`**. The image **downloads `microsoft/Phi-4-mini-instruct` during `docker build`** and stores it under `/app/hf_cache`, so **workers do not need tens of GB of free disk at runtime** (fixes `[Errno 28] No space left on device` on small container disks). The image is much larger and the first build takes longer. If your build environment cannot handle that, set **`EMBED_PHI4_BASE=0`** and instead attach a **large network volume** plus `HF_HOME` / `TMPDIR` pointing at the mount (see disk section below).
+
 **Adapters:** either:
 
 1. **Network Volume (recommended)** — upload `outputs/triad_adapters` to a RunPod volume and mount it at e.g. `/runpod/triad`; set **`TRIAD_ADAPTERS_DIR=/runpod/triad`**, or  
@@ -48,6 +50,8 @@ Do one or more of:
 3. Use RunPod **[cached models](https://docs.runpod.io/serverless/endpoints/model-caching)** for `microsoft/Phi-4-mini-instruct` when available so workers skip a full download.
 
 The image sets **`HF_HUB_DISABLE_XET=1`** so Hub downloads use a simpler path that is less likely to blow temp space during XET reconstruction (still need enough disk overall).
+
+**Why the second request took longer:** cold start had to **pull a ~155MB image layer**, then the worker started **downloading / caching the full base model** onto a small container disk until it hit **ENOSPC**. With **`EMBED_PHI4_BASE=1`** (default), that download happens at **build** time instead, so the job mostly pays **GPU load + inference** time, not multi‑GB downloads on the worker disk.
 
 ## Request / response shape
 
