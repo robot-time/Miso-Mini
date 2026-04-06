@@ -25,14 +25,26 @@ from pathlib import Path
 
 
 def _bootstrap_hf_env() -> None:
-    """Use baked-in Hub cache if present (see Dockerfile EMBED_PHI4_BASE); else rely on HF_HOME from RunPod env."""
+    """
+    If the image was built with EMBED_PHI4_BASE=1, snapshots live under /app/hf_cache/hub/models--microsoft--Phi-4-mini-instruct*/...
+    Force Hub offline so we never re-download shards at runtime (that phase is CPU-heavy, uses ~0 GPU, and can ENOSPC a small disk).
+    """
     baked = Path("/app/hf_cache")
-    if baked.is_dir() and any(baked.iterdir()):
-        os.environ.setdefault("HF_HOME", str(baked.resolve()))
+    hub = baked / "hub"
+    has_phi = hub.is_dir() and any(hub.glob("models--microsoft--Phi-4-mini-instruct*"))
+    if has_phi:
+        os.environ["HF_HOME"] = str(baked.resolve())
+        os.environ.setdefault("HF_HUB_OFFLINE", "1")
+        os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
     os.environ.setdefault("HF_HUB_DISABLE_XET", "1")
 
 
+logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
+log = logging.getLogger("triad_serverless")
+
 _bootstrap_hf_env()
+if os.environ.get("HF_HUB_OFFLINE") == "1":
+    log.info("HF offline: using baked /app/hf_cache only (no runtime model download).")
 
 # /app/infer_triad.py (see Dockerfile)
 sys.path.insert(0, "/app")
@@ -40,9 +52,6 @@ sys.path.insert(0, "/app")
 import runpod  # noqa: E402
 
 import infer_triad  # noqa: E402
-
-log = logging.getLogger("triad_serverless")
-logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
 
 _runtime_lock = threading.Lock()
 _runtime: infer_triad.TriadHotSwapRuntime | None = None
