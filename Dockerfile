@@ -12,6 +12,8 @@ ENV TRIAD_ADAPTERS_DIR=/app/adapters
 ENV TRIAD_CONFIG=/app/configs/triad_reasoning.yaml
 # Prefer PyTorch CUDA wheels if a dependency tries to pull torch from PyPI
 ENV PIP_EXTRA_INDEX_URL=https://download.pytorch.org/whl/cu124
+# XET downloads can need a lot of temp space; small serverless container disks → ENOSPC during hub downloads.
+ENV HF_HUB_DISABLE_XET=1
 
 WORKDIR /app
 

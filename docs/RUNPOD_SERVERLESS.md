@@ -33,7 +33,21 @@ RunPod **GitHub** integration: set the Dockerfile path to **`Dockerfile`** (repo
    - `TRIAD_ADAPTERS_DIR` — mount path to the folder that contains `reasoning/`, `response/`, `critic/`
    - `TRIAD_CONFIG` — optional override path to YAML inside the image
    - `HF_TOKEN` — if the base model is gated
-   - `HF_HOME` — point to a cached volume for faster cold starts ([RunPod model caching](https://docs.runpod.io/serverless/endpoints/model-caching))
+   - `HF_HOME` — point to a **large** path (see disk section below) or [model caching](https://docs.runpod.io/serverless/endpoints/model-caching)
+
+### Disk space (`No space left on device` / `File reconstruction error`)
+
+The base model download + Hugging Face cache can need **well over 10 GB** on disk. Serverless **container disk** is easy to exhaust.
+
+Do one or more of:
+
+1. **Raise container disk** for the endpoint (RunPod **Edit endpoint** → advanced / storage — set **at least ~30 GB** if the UI offers it).
+2. Attach a **Network volume** (e.g. 30–50 GB), mount it on the worker, then set:
+   - `HF_HOME=/path/to/volume/hf_home` (use the mount path RunPod shows for that volume)
+   - Optionally `TMPDIR=/path/to/volume/tmp` so temp extraction also uses the volume.
+3. Use RunPod **[cached models](https://docs.runpod.io/serverless/endpoints/model-caching)** for `microsoft/Phi-4-mini-instruct` when available so workers skip a full download.
+
+The image sets **`HF_HUB_DISABLE_XET=1`** so Hub downloads use a simpler path that is less likely to blow temp space during XET reconstruction (still need enough disk overall).
 
 ## Request / response shape
 
