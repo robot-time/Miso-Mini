@@ -118,9 +118,23 @@ python scripts/plot_triad_delta.py \
 
 Optional scatter plots: `scripts/plot_benchmark_scatter.py` — supply your own JSON with measured points only; the repo does not ship leaderboard scatter figures.
 
+## Plot: lm-eval suite (bar chart)
+
+After `benchmark_suite.py` (or any run that leaves one `results_*.json` per subfolder), generate a single bar figure plus a small JSON summary:
+
+```bash
+python scripts/plot_lm_eval_suite.py eval/benchmark_suite_2026-01-01/ \
+  --title "Your LoRA name"
+# writes eval/benchmark_suite_2026-01-01/figures/<folder_stem>_scores.png
+# and .../figures/suite_plot_summary.json
+```
+
+Headline metrics: **GSM8K** uses `exact_match` (flexible extract); **HellaSwag / ARC** (and similar) use **`acc_norm`** when present. Uses `manifest.json` run order when available.
+
 ---
 
 ## Practical order
 
 1. `pack_for_gpu_eval.sh` → GPU → merge → `benchmark_suite.py` → download `eval/benchmark_suite_*`.
-2. `eval_triad_delta.py` for critic effect on your JSONL.
+2. `plot_lm_eval_suite.py` on that folder for bar charts under `figures/`.
+3. `eval_triad_delta.py` for critic effect on your JSONL.
